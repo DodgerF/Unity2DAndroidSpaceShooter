@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 467911785849498163}
   - component: {fileID: 974246219609254945}
   - component: {fileID: 1712228857260095851}
+  - component: {fileID: 4144062961980076860}
   m_Layer: 0
   m_Name: Ship_01
   m_TagString: Untagged
@@ -361,7 +362,21 @@ MonoBehaviour:
   indestructible: 0
   hitPoints: 100
   mass: 1
-  thrust: 500
-  mobility: 1000
-  maxLinearVelocity: 8
-  maxAngularVelocity: 180
+  thrust: 1000
+  mobility: 2000
+  maxLinearVelocity: 15
+  maxAngularVelocity: 360
+--- !u!114 &4144062961980076860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562687071633627685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc7f161e54993c459d6c9bb1b4accd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _velocityDamageModifier: 0
+  _damageConstant: 1000

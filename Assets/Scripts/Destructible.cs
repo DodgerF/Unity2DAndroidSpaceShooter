@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SpaceShooter
 {
@@ -35,6 +36,9 @@ namespace SpaceShooter
             currentHitPoints = hitPoints;
         }
 
+        [SerializeField] private UnityEvent m_EventOnDeth;
+        public UnityEvent EventOnDeth => m_EventOnDeth;
+
         #endregion
 
         #region Public API
@@ -44,9 +48,11 @@ namespace SpaceShooter
         /// <param name="damage"> Damage dealt to object </param>
         public void ApplyDamage(int damage)
         {
+
             if (indestructible) return;
 
             currentHitPoints -= damage;
+           
             if (currentHitPoints <= 0)
             {
                 OnDeath();
@@ -61,7 +67,11 @@ namespace SpaceShooter
         protected virtual void OnDeath()
         {
             Destroy(gameObject);
+
+            m_EventOnDeth?.Invoke();
         }
+
+        
     }
 
 }
