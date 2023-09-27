@@ -66,9 +66,9 @@ namespace SpaceShooter
         /// </summary>
         protected virtual void OnDeath()
         {
-            Destroy(gameObject);
-
             m_EventOnDeth?.Invoke();
+
+            Destroy(gameObject);
         }
 
         
