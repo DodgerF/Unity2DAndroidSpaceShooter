@@ -36,8 +36,8 @@ namespace SpaceShooter
             currentHitPoints = hitPoints;
         }
 
-        [SerializeField] private UnityEvent m_EventOnDeth;
-        public UnityEvent EventOnDeth => m_EventOnDeth;
+        [SerializeField] private UnityEvent m_EventOnDeath;
+        public UnityEvent EventOnDeath => m_EventOnDeath;
 
         #endregion
 
@@ -66,7 +66,7 @@ namespace SpaceShooter
         /// </summary>
         protected virtual void OnDeath()
         {
-            m_EventOnDeth?.Invoke();
+            m_EventOnDeath?.Invoke();
 
             Destroy(gameObject);
         }

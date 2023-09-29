@@ -2,27 +2,8 @@ using UnityEngine;
 
 namespace SpaceShooter
 {
-    public class LevelBoundary : MonoBehaviour
+    public class LevelBoundary : SingletonBase<LevelBoundary>
     {
-
-        #region Singleton
-        public static LevelBoundary Instance;
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Debug.Log("LevelBoundary already exist");
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-
-            DontDestroyOnLoad(gameObject);
-        }
-        #endregion
-
         [SerializeField] private float m_Radius;
         public float Radius => m_Radius;
 

@@ -13,12 +13,12 @@ namespace SpaceShooter
         private void Start()
         {
             m_Destructable = GetComponent<Destructible>();
-            m_Destructable.EventOnDeth.AddListener(OnExplosion);
+            m_Destructable.EventOnDeath.AddListener(OnExplosion);
         }
 
         private void OnDisable()
         {
-            m_Destructable.EventOnDeth.RemoveListener(OnExplosion);
+            m_Destructable.EventOnDeath.RemoveListener(OnExplosion);
         }
 
         private void OnExplosion()

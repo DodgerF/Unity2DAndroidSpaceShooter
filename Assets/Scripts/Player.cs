@@ -21,12 +21,12 @@ namespace SpaceShooter
 
         private void OnEnable()
         {
-            m_Ship.EventOnDeth.AddListener(OnShopDeath);
+            m_Ship.EventOnDeath.AddListener(OnShopDeath);
         }
 
         private void OnDisable()
         {
-            m_Ship.EventOnDeth.RemoveListener(OnShopDeath);
+            m_Ship.EventOnDeath.RemoveListener(OnShopDeath);
         }
 
         private void OnShopDeath()
