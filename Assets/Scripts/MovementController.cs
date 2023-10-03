@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SpaceShooter
@@ -17,20 +18,28 @@ namespace SpaceShooter
 
         private ControlMode m_ControlMode;
 
+        [SerializeField] private PointerClickHold m_MobileFirePrimary;
+        [SerializeField] private PointerClickHold m_MobileFireSecondary;
+
         private void Start()
         {
             if (Application.isMobilePlatform)
             {
                 m_ControlMode = ControlMode.Mobile;
                 m_MobileJoystick.gameObject.SetActive(true);
+                m_MobileFirePrimary.gameObject.SetActive(true);
+                m_MobileFireSecondary.gameObject.SetActive(true);
+
             }
             else
             {
                 m_ControlMode = ControlMode.Keyboard;
                 m_MobileJoystick.gameObject.SetActive(false);
+                m_MobileFirePrimary.gameObject.SetActive(false);
+                m_MobileFireSecondary.gameObject.SetActive(false);
             }
 
-            //m_ControlMode = ControlMode.Mobile;
+           // m_ControlMode = ControlMode.Mobile;
 
         }
 
@@ -54,6 +63,16 @@ namespace SpaceShooter
 
             m_TargetShip.ThrustControl = Mathf.Max(0, dot);
             m_TargetShip.TorqueControl = -dot2;
+
+            if (m_MobileFirePrimary.IsHold)
+            {
+                m_TargetShip.Fire(TurretMode.Primary);
+            }
+
+            if (m_MobileFireSecondary.IsHold)
+            {
+                m_TargetShip.Fire(TurretMode.Secondary);
+            }
         }
 
         private void ControlKeyboard()
@@ -77,6 +96,15 @@ namespace SpaceShooter
             {
                 torque = -1.0f;
             }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                m_TargetShip.Fire(TurretMode.Primary);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                m_TargetShip.Fire(TurretMode.Secondary);
+            }
+
 
             m_TargetShip.ThrustControl = thrust;
             m_TargetShip.TorqueControl = torque;

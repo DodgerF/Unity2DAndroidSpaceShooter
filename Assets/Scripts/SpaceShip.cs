@@ -33,6 +33,11 @@ namespace SpaceShooter
         [SerializeField] private float maxAngularVelocity;
 
         /// <summary>
+        /// Массив туррелей
+        /// </summary>
+        [SerializeField] private Turret[] m_Turrets;
+
+        /// <summary>
         /// Сохраненная ссылка на ригид
         /// </summary>
         private Rigidbody2D rigid;
@@ -81,12 +86,25 @@ namespace SpaceShooter
         private void UpdateRigidBody()
         {
             rigid.AddForce(thrust * ThrustControl * transform.up * Time.fixedDeltaTime, ForceMode2D.Force);
-        
+
             rigid.AddForce(-rigid.velocity * (thrust / maxLinearVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
 
             rigid.AddTorque(TorqueControl * mobility * Time.fixedDeltaTime, ForceMode2D.Force);
 
             rigid.AddTorque(-rigid.angularVelocity * (mobility / maxAngularVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
         }
+
+        public void Fire(TurretMode mode)
+        {
+            foreach(Turret turret in m_Turrets)
+            {
+                if (turret.Mode == mode)
+                {
+                    turret.Fire();
+                }
+            }
+        }
+
+
     }
 }
