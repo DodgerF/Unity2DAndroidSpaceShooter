@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 6501508594674717664}
   - component: {fileID: 4827742349980900343}
   m_Layer: 0
-  m_Name: Tail
+  m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,10 @@ MonoBehaviour:
   mobility: 2000
   maxLinearVelocity: 15
   maxAngularVelocity: 360
-  m_Turrets: []
+  m_Turrets:
+  - {fileID: 5126642016008510400}
+  - {fileID: 8144722590586282898}
+  - {fileID: 2102894943395886034}
 --- !u!114 &4144062961980076860
 MonoBehaviour:
   m_ObjectHideFlags: 0

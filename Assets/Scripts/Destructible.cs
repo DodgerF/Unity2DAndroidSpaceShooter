@@ -24,8 +24,8 @@ namespace SpaceShooter
         /// <summary>
         /// Current hit points
         /// </summary>
-        private int currentHitPoints;
-        public int HitPoints => currentHitPoints;
+        private float currentHitPoints;
+        public float HitPoints => currentHitPoints;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace SpaceShooter
         /// Applying damage to an object
         /// </summary>
         /// <param name="damage"> Damage dealt to object </param>
-        public void ApplyDamage(int damage)
+        public void ApplyDamage(float damage)
         {
 
             if (indestructible) return;

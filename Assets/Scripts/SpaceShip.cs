@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace SpaceShooter
 {
@@ -10,27 +11,27 @@ namespace SpaceShooter
         /// Масса для автоматической установки у ригида.
         /// </summary>
         [Header("SpaceShip")]
-        [SerializeField] private float mass;
+        [SerializeField] private float m_Mass;
 
         /// <summary>
         /// Толкающая вперед сила.
         /// </summary>
-        [SerializeField] private float thrust;
+        [SerializeField] private float m_Thrust;
 
         /// <summary>
         /// Вращающая сила.
         /// </summary>
-        [SerializeField] private float mobility;
+        [SerializeField] private float m_Mobility;
 
         /// <summary>
         /// Максимальная линейная скорость.
         /// </summary>
-        [SerializeField] private float maxLinearVelocity;
+        [SerializeField] private float m_MaxLinearVelocity;
 
         /// <summary>
         /// Максимальная вращательная скорость в градусах/сек.
         /// </summary>
-        [SerializeField] private float maxAngularVelocity;
+        [SerializeField] private float m_MaxAngularVelocity;
 
         /// <summary>
         /// Массив туррелей
@@ -40,7 +41,32 @@ namespace SpaceShooter
         /// <summary>
         /// Сохраненная ссылка на ригид
         /// </summary>
-        private Rigidbody2D rigid;
+        private Rigidbody2D m_Rigid;
+
+        /// <summary>
+        /// Максимальный показатель энергии
+        /// </summary>
+        [SerializeField] private int m_MaxEnergy;
+
+        /// <summary>
+        /// Максимальный показатель патронов
+        /// </summary>
+        [SerializeField] private int m_MaxAmmo;
+
+        /// <summary>
+        /// Количество энергии в секунду
+        /// </summary>
+        [SerializeField] private float m_EnergyRegenPerSecond;
+
+        /// <summary>
+        /// Текущее количество энергии
+        /// </summary>
+        private float m_PrimaryEnergy;
+
+        /// <summary>
+        /// Текущее количество патронов
+        /// </summary>
+        private int m_SecondaryAmmo;
 
         #region Public API
 
@@ -63,9 +89,12 @@ namespace SpaceShooter
         {
             base.Start();
 
-            rigid = GetComponent<Rigidbody2D>();
-            rigid.mass = mass;
-            rigid.inertia = 1.0f;
+            m_Rigid = GetComponent<Rigidbody2D>();
+            m_Rigid.mass = m_Mass;
+            m_Rigid.inertia = 1.0f;
+
+            m_PrimaryEnergy = m_MaxEnergy;
+            m_SecondaryAmmo = m_MaxAmmo;
         }
 
         private void Update()
@@ -76,6 +105,7 @@ namespace SpaceShooter
         private void FixedUpdate()
         {
             UpdateRigidBody();
+            UpdateEnergyRegen();
         }
 
         #endregion
@@ -85,13 +115,13 @@ namespace SpaceShooter
         /// </summary>
         private void UpdateRigidBody()
         {
-            rigid.AddForce(thrust * ThrustControl * transform.up * Time.fixedDeltaTime, ForceMode2D.Force);
+            m_Rigid.AddForce(m_Thrust * ThrustControl * transform.up * Time.fixedDeltaTime, ForceMode2D.Force);
 
-            rigid.AddForce(-rigid.velocity * (thrust / maxLinearVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
+            m_Rigid.AddForce(-m_Rigid.velocity * (m_Thrust / m_MaxLinearVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
 
-            rigid.AddTorque(TorqueControl * mobility * Time.fixedDeltaTime, ForceMode2D.Force);
+            m_Rigid.AddTorque(TorqueControl * m_Mobility * Time.fixedDeltaTime, ForceMode2D.Force);
 
-            rigid.AddTorque(-rigid.angularVelocity * (mobility / maxAngularVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
+            m_Rigid.AddTorque(-m_Rigid.angularVelocity * (m_Mobility / m_MaxAngularVelocity) * Time.fixedDeltaTime, ForceMode2D.Force);
         }
 
         public void Fire(TurretMode mode)
@@ -105,6 +135,43 @@ namespace SpaceShooter
             }
         }
 
+        public void AddEnergy(int energy)
+        {
+            m_PrimaryEnergy = Mathf.Clamp(m_PrimaryEnergy + energy, 0, m_MaxEnergy);
+        }
 
+        public void AddAmmo(int ammo)
+        {
+            m_SecondaryAmmo = Mathf.Clamp(m_SecondaryAmmo + ammo, 0, m_MaxAmmo);
+        }
+
+        private void UpdateEnergyRegen()
+        {
+            m_PrimaryEnergy += m_EnergyRegenPerSecond * Time.fixedDeltaTime;
+            m_PrimaryEnergy = Mathf.Clamp(m_PrimaryEnergy,0, m_MaxEnergy);
+        }
+
+        public bool DrawAmmo(int count)
+        {
+
+            if (m_SecondaryAmmo >= count)
+            {
+                m_SecondaryAmmo -= count;
+                return true;
+            }
+
+            return false;
+        }
+        public bool DrawEnergy(int count)
+        {
+
+            if (m_PrimaryEnergy >= count)
+            {
+                m_PrimaryEnergy -= count;
+                return true;
+            }
+
+            return false;
+        }
     }
 }
