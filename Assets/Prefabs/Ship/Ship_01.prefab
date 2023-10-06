@@ -516,15 +516,18 @@ MonoBehaviour:
   m_EventOnDeath:
     m_PersistentCalls:
       m_Calls: []
-  mass: 1
-  thrust: 1000
-  mobility: 2000
-  maxLinearVelocity: 15
-  maxAngularVelocity: 360
+  m_Mass: 1
+  m_Thrust: 1000
+  m_Mobility: 2000
+  m_MaxLinearVelocity: 15
+  m_MaxAngularVelocity: 360
   m_Turrets:
   - {fileID: 5126642016008510400}
   - {fileID: 8144722590586282898}
   - {fileID: 2102894943395886034}
+  m_MaxEnergy: 20
+  m_MaxAmmo: 10
+  m_EnergyRegenPerSecond: 1
 --- !u!114 &4144062961980076860
 MonoBehaviour:
   m_ObjectHideFlags: 0

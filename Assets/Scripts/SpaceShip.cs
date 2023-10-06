@@ -173,5 +173,13 @@ namespace SpaceShooter
 
             return false;
         }
+
+        public void AssignWeapon(TurretProperties properties)
+        {
+            foreach(Turret turret in m_Turrets)
+            {
+                turret.AssignLoadout(properties);
+            }
+        }
     }
 }

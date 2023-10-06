@@ -7,7 +7,7 @@ namespace SpaceShooter
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.transform.root.TryGetComponent<SpaceShip>(out  SpaceShip ship))
+            if (collision.transform.root.TryGetComponent<SpaceShip>(out SpaceShip ship))
             {
                 OnPickedUp(ship);
                 Destroy(gameObject);
@@ -16,8 +16,6 @@ namespace SpaceShooter
         }
 
         protected abstract void OnPickedUp(SpaceShip ship);
-
-
     }
 }
 

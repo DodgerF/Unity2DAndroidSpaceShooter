@@ -4,17 +4,16 @@ namespace SpaceShooter
 {
     public class Projectile : Entity
     {
-        [SerializeField] private float m_Velocity;
-        [SerializeField] private float m_Lifetime;
-        [SerializeField] private float m_Damage;
-        [SerializeField] private DestroyWhenTimerEnd m_DestroyTimerPref;
-        private float m_Timer;
+        [SerializeField] protected float m_Velocity;
+        [SerializeField] protected float m_Lifetime;
+        [SerializeField] protected float m_Damage;
+        protected float m_Timer;
 
-        private Destructible m_Parent;
+        protected Destructible m_Parent;
 
         #region Unity Events
 
-        private void Update()
+        protected virtual void Update()
         {
             float stepLenght = Time.deltaTime * m_Velocity;
             Vector2 step = transform.up * stepLenght;

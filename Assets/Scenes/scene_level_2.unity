@@ -3302,6 +3302,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1712228857260095851, guid: b906597dee4226e4db87d8c9091969ee, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712228857260095851, guid: b906597dee4226e4db87d8c9091969ee, type: 3}
+      propertyPath: m_Thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 7562687071633627685, guid: b906597dee4226e4db87d8c9091969ee, type: 3}
       propertyPath: m_Name
       value: Ship_01

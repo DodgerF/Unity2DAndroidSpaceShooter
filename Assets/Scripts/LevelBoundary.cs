@@ -16,13 +16,13 @@ namespace SpaceShooter
         [SerializeField] private Mode m_BoundaryMode;
         public Mode BoundaryMode => m_BoundaryMode;
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             UnityEditor.Handles.color = Color.green;
             UnityEditor.Handles.DrawWireDisc(transform.position, transform.forward, m_Radius);
         }
-#endif
+        #endif
 
     }
 }
