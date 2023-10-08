@@ -45,10 +45,21 @@ namespace SpaceShooter
 
             if (m_Ship.DrawAmmo(m_TurretProperties.AmmoUsage) == false) return;
 
-            Projectile projectile = Instantiate(m_TurretProperties.ProjectilePrefab).GetComponent<Projectile>();
-            projectile.transform.position = transform.position;
-            projectile.transform.up = transform.up;
-            projectile.SetParentShooter(m_Ship);
+            if (m_TurretProperties.ProjectilePrefab != null)
+            {
+                Projectile projectile = Instantiate(m_TurretProperties.ProjectilePrefab).GetComponent<Projectile>();
+                projectile.transform.position = transform.position;
+                projectile.transform.up = transform.up;
+                projectile.SetParentShooter(m_Ship);
+            }
+            if (m_TurretProperties.HomingMissilePrefab != null)
+            {
+                HomingMissile missile = Instantiate(m_TurretProperties.HomingMissilePrefab).GetComponent<HomingMissile>();
+                missile.transform.position = transform.position;
+                missile.transform.up = transform.up;
+                missile.SetParentShooter(m_Ship);
+            }
+            
 
             m_RefireTimer = m_TurretProperties.RateOfFire;
 

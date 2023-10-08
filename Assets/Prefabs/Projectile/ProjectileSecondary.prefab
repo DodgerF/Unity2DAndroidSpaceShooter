@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickname: 
   m_Velocity: 15
-  m_Lifetime: 1000
+  m_Lifetime: 10
   m_Damage: 50
 --- !u!1 &6470124321918499450
 GameObject:

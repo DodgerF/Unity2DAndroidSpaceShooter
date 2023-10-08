@@ -18,6 +18,16 @@ namespace SpaceShooter
             float stepLenght = Time.deltaTime * m_Velocity;
             Vector2 step = transform.up * stepLenght;
 
+            CheckRaycastAhead(stepLenght);
+            CheckTimer();
+
+            transform.position += new Vector3(step.x, step.y, 0);
+        }
+
+        #endregion
+
+        private void CheckRaycastAhead(float stepLenght)
+        {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, stepLenght);
             if (hit)
             {
@@ -25,26 +35,24 @@ namespace SpaceShooter
                 {
                     destructible.ApplyDamage(m_Damage);
                 }
-                OnProjectileLifeEnd(hit.collider, hit.point);
+                OnProjectileLifeEnd();
             }
-
+        }
+        protected virtual void CheckTimer()
+        {
             m_Timer += Time.deltaTime;
             if (m_Timer > m_Lifetime)
             {
-                Destroy(gameObject);
+                OnProjectileLifeEnd();
             }
-
-            transform.position += new Vector3(step.x, step.y, 0);
         }
 
-        #endregion
-
-        private void OnProjectileLifeEnd(Collider2D collider, Vector2 position)
+        protected virtual void OnProjectileLifeEnd()
         {
             Destroy(gameObject);
         }
 
-        public void SetParentShooter(Destructible parent)
+        public virtual void SetParentShooter(Destructible parent)
         {
             m_Parent = parent;
         }

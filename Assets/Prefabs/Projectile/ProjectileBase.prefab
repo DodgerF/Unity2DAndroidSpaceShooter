@@ -48,9 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickname: 
   m_Velocity: 15
-  m_Lifetime: 1000
+  m_Lifetime: 10
   m_Damage: 10
-  m_DestroyTimerPref: {fileID: 0}
 --- !u!1 &4487021834963648281
 GameObject:
   m_ObjectHideFlags: 0
