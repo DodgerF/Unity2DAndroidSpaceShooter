@@ -46,7 +46,7 @@ namespace SpaceShooter
         /// Applying damage to an object
         /// </summary>
         /// <param name="damage"> Damage dealt to object </param>
-        public void ApplyDamage(float damage)
+        public virtual void ApplyDamage(float damage)
         {
 
             if (indestructible) return;

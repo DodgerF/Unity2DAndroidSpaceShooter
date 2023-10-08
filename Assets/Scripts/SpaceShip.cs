@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -68,6 +69,11 @@ namespace SpaceShooter
         /// </summary>
         private int m_SecondaryAmmo;
 
+        private bool m_IsInvulnerable;
+        public bool IsInvulnerable => m_IsInvulnerable;
+
+        [SerializeField] private SpriteRenderer m_ShieldSprite;
+
         #region Public API
 
         /// <summary>
@@ -95,6 +101,13 @@ namespace SpaceShooter
 
             m_PrimaryEnergy = m_MaxEnergy;
             m_SecondaryAmmo = m_MaxAmmo;
+
+            m_IsInvulnerable = false;
+
+            if (m_ShieldSprite != null)
+            {
+                m_ShieldSprite.enabled = false;
+            }
         }
 
         private void Update()
@@ -180,6 +193,50 @@ namespace SpaceShooter
             {
                 turret.AssignLoadout(properties);
             }
+        }
+
+        protected override void OnDeath()
+        {
+            if (m_IsInvulnerable) return;
+
+            base.OnDeath();
+        }
+
+        public override void ApplyDamage(float damage)
+        {
+            if (m_IsInvulnerable) return;
+ 
+            base.ApplyDamage(damage);
+        }
+
+        public void SetInvulnerable(float time)
+        {
+            StartCoroutine(InvulnerableCorutine(time));
+        }
+
+        private IEnumerator InvulnerableCorutine(float time)
+        {
+            m_IsInvulnerable = true;
+            m_ShieldSprite.enabled = true;
+
+            yield return new WaitForSeconds(time);
+
+            m_IsInvulnerable = false;
+            m_ShieldSprite.enabled = false;
+        }
+
+        public void AddSpeed(float speed, float time)
+        {
+            StartCoroutine(SpeedBonusCorutine(speed, time));
+        }
+
+        private IEnumerator SpeedBonusCorutine(float speed, float time)
+        {
+            m_Thrust += speed;
+
+            yield return new WaitForSeconds(time);
+
+            m_Thrust -= speed;
         }
     }
 }

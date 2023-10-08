@@ -9,6 +9,7 @@ namespace SpaceShooter
 
         [SerializeField] private float m_ExplosionTime;
         [SerializeField] private GameObject m_PrefExplosion;
+        [SerializeField] public float Scale;
 
         private void Start()
         {
@@ -23,7 +24,8 @@ namespace SpaceShooter
 
         private void OnExplosion()
         {
-            Instantiate(m_PrefExplosion, m_Destructable.transform.position,Quaternion.identity);
+            GameObject explosion = Instantiate(m_PrefExplosion, m_Destructable.transform.position, Quaternion.identity);
+            explosion.transform.localScale = Vector3.one * Scale;
         }
     }
 }
