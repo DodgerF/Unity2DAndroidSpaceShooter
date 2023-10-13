@@ -5,6 +5,7 @@ namespace SpaceShooter
     public class Projectile : Entity
     {
         [SerializeField] protected float m_Velocity;
+        public float Velocity => m_Velocity;
         [SerializeField] protected float m_Lifetime;
         [SerializeField] protected float m_Damage;
         protected float m_Timer;

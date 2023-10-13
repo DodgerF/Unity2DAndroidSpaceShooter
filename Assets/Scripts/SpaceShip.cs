@@ -38,6 +38,7 @@ namespace SpaceShooter
         /// Массив туррелей
         /// </summary>
         [SerializeField] private Turret[] m_Turrets;
+        public Turret FirstTurret => m_Turrets[0];
 
         /// <summary>
         /// Сохраненная ссылка на ригид
