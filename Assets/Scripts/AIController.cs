@@ -9,12 +9,14 @@ namespace SpaceShooter
         public enum AIBehaviour
         {
             Null,
-            Patrol
+            Patrol,
         }
 
         [SerializeField] public AIBehaviour m_AIBehaviour;
 
         [SerializeField] private AIZonePatrol m_PatolZone;
+        [SerializeField] private AIPath m_PatrolPath;
+        private int m_CurrentPointPatrol;
 
         [Range(0f, 1f)]
         [SerializeField] private float m_NavigationLinear;
@@ -39,7 +41,7 @@ namespace SpaceShooter
         private void Start()
         {
             m_SpaceShip = GetComponent<SpaceShip>();
-
+            m_CurrentPointPatrol = 0;
             InitTimers();
         }
         private void Update()
@@ -63,8 +65,8 @@ namespace SpaceShooter
 
         private void UpdateVehaviourPatrol()
         {
-            FindNewPosition();
             ControlShip();
+            FindNewPosition();
             EvadeCollision();
             FindNewAttackTarget();
             Fire();
@@ -134,7 +136,7 @@ namespace SpaceShooter
                 if (m_SelectedTarget != null)
                 {
                     m_MovePosition = MakeLead(
-                        m_SpaceShip.transform.position, m_SpaceShip.transform.up * m_SpaceShip.FirstTurret.Property.ProjectilePrefab.Velocity,
+                        m_SpaceShip.transform.position, m_SpaceShip.transform.up * (m_SpaceShip.FirstTurret.Property.ProjectilePrefab.Velocity),
                         m_SelectedTarget.transform.position, m_SelectedTarget.GetComponent<Rigidbody2D>().velocity);
                 }
                 else
@@ -158,6 +160,19 @@ namespace SpaceShooter
                         {
                             m_MovePosition = m_PatolZone.transform.position;
                         }
+                    }
+                    if (m_PatrolPath != null)
+                    {
+                        AIZonePatrol point = m_PatrolPath[m_CurrentPointPatrol];
+
+                        bool isInsidePoint = (point.transform.position - transform.position).sqrMagnitude < point.Radius * point.Radius;
+
+                        if (isInsidePoint)
+                        {
+                            m_CurrentPointPatrol = (m_CurrentPointPatrol + 1 + m_PatrolPath.Lenght) % m_PatrolPath.Lenght;
+                        }
+
+                        m_MovePosition = point.transform.position;
                     }
                 }
             }
