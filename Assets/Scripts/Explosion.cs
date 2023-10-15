@@ -11,7 +11,7 @@ namespace SpaceShooter
         [SerializeField] private GameObject m_PrefExplosion;
         [SerializeField] public float Scale;
 
-        private void Start()
+        private void Awake()
         {
             m_Destructable = GetComponent<Destructible>();
             m_Destructable.EventOnDeath.AddListener(OnExplosion);

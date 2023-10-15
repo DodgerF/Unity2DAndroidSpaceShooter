@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace SpaceShooter
 {
@@ -28,11 +26,13 @@ namespace SpaceShooter
         /// Максимальная линейная скорость.
         /// </summary>
         [SerializeField] private float m_MaxLinearVelocity;
+        public float MaxLinearVelocity => m_MaxLinearVelocity;
 
         /// <summary>
         /// Максимальная вращательная скорость в градусах/сек.
         /// </summary>
         [SerializeField] private float m_MaxAngularVelocity;
+        public float MaxAngularVelocity => m_MaxAngularVelocity;
 
         /// <summary>
         /// Массив туррелей
@@ -74,7 +74,8 @@ namespace SpaceShooter
         public bool IsInvulnerable => m_IsInvulnerable;
 
         [SerializeField] private SpriteRenderer m_ShieldSprite;
-
+        [SerializeField] private SpriteRenderer m_PreviewImage;
+        public SpriteRenderer PreviewImage => m_PreviewImage;
         #region Public API
 
         /// <summary>

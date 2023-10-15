@@ -228,7 +228,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3038394691555121069}
   - component: {fileID: 146576342233413420}
-  - component: {fileID: 7297647692011237075}
   m_Layer: 0
   m_Name: VisualModel
   m_TagString: Untagged
@@ -303,41 +302,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &7297647692011237075
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4085314226220506257}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &4676000573336200192
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52467765474802209}
   - component: {fileID: 9070170499697883601}
+  - component: {fileID: 8076342565018624042}
   - component: {fileID: -1595532289453786959}
   - component: {fileID: 3272122960251438144}
   - component: {fileID: 8300245740735282304}
@@ -454,6 +419,41 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &8076342565018624042
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842698544529072659}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &-1595532289453786959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AIBehaviour: 1
   m_PatolZone: {fileID: 0}
+  m_PatrolPath: {fileID: 0}
   m_NavigationLinear: 0.333
   m_NavigationAngular: 0.676
   m_RandomSelectMovePointTime: 5
@@ -493,6 +494,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_TeamId: 1
+  m_ScoreValue: 200
   m_Mass: 1
   m_Thrust: 1000
   m_Mobility: 2000
@@ -506,6 +508,7 @@ MonoBehaviour:
   m_MaxAmmo: 10
   m_EnergyRegenPerSecond: 1
   m_ShieldSprite: {fileID: 2857014548917786484}
+  m_PreviewImage: {fileID: 0}
 --- !u!114 &8300245740735282304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +622,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.98953456, g: 1, b: 0.3160377, a: 0.15686275}
   m_FlipX: 0

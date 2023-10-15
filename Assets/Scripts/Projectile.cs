@@ -4,6 +4,7 @@ namespace SpaceShooter
 {
     public class Projectile : Entity
     {
+        #region Properties
         [SerializeField] protected float m_Velocity;
         public float Velocity => m_Velocity;
         [SerializeField] protected float m_Lifetime;
@@ -11,6 +12,7 @@ namespace SpaceShooter
         protected float m_Timer;
 
         protected Destructible m_Parent;
+        #endregion
 
         #region Unity Events
 
@@ -32,9 +34,14 @@ namespace SpaceShooter
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, stepLenght);
             if (hit)
             {
-                if (hit.collider.transform.root.TryGetComponent<Destructible>(out Destructible destructible) && destructible != m_Parent)
+                if (hit.collider.transform.TryGetComponent<Destructible>(out Destructible destructible) && destructible != m_Parent)
                 {
                     destructible.ApplyDamage(m_Damage);
+
+                    if (m_Parent == Player.Instance.Ship)
+                    {
+                        Player.Instance.AddScore(destructible.ScoreValue);
+                    }
                 }
                 OnProjectileLifeEnd();
             }

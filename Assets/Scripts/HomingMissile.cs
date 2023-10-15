@@ -77,7 +77,7 @@ namespace SpaceShooter
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, stepLenght);
             if (hit)
             {
-                if (hit.collider.transform.root.TryGetComponent<Destructible>(out Destructible destructible) && destructible != m_Parent)
+                if (hit.collider.transform.TryGetComponent<Destructible>(out Destructible destructible) && destructible != m_Parent)
                 {
                     destructible.ApplyDamage(m_Damage);
                 }

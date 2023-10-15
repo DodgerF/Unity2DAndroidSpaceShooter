@@ -22,6 +22,7 @@ namespace SpaceShooter
         /// Initial hit points
         /// </summary>
         [SerializeField] private int hitPoints;
+        public float MaxHP => hitPoints;
 
         /// <summary>
         /// Current hit points
@@ -93,8 +94,13 @@ namespace SpaceShooter
         [SerializeField] private int m_TeamId;
         public int TeamId => m_TeamId;
 
-        
 
+        #region Score
+
+        [SerializeField] private int m_ScoreValue;
+        public int ScoreValue => m_ScoreValue;
+
+        #endregion
 
     }
 
