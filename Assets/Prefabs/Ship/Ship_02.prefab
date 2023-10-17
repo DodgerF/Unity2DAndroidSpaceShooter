@@ -517,7 +517,7 @@ MonoBehaviour:
   m_EventOnDeath:
     m_PersistentCalls:
       m_Calls: []
-  m_TeamId: 2
+  m_TeamId: 1
   m_ScoreValue: 0
   m_Mass: 1
   m_Thrust: 1000

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace SpaceShooter
 {
@@ -12,8 +11,8 @@ namespace SpaceShooter
         #region Properties
         [SerializeField] private int m_ReferenceTime;
         public int ReferenceTime => m_ReferenceTime;
+        [SerializeField] private int BonusScorePerSecond;
 
-        [SerializeField] private UnityEvent m_EventLevelComplited;
         private ILevelCondition[] m_Conditions;
         private bool m_IsComplited;
         
@@ -56,7 +55,11 @@ namespace SpaceShooter
             if (numCompleted == m_Conditions.Length)
             {
                 m_IsComplited = true;
-                m_EventLevelComplited?.Invoke();
+
+                if (m_LevelTime < m_ReferenceTime)
+                {
+                    Player.Instance.AddScore((int)(m_ReferenceTime - m_LevelTime) * BonusScorePerSecond);
+                }
 
                 LevelSequenceController.Instance.FinishCurrentLevel(true);
             }

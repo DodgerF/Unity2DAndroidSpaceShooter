@@ -13,6 +13,7 @@ namespace SpaceShooter
 
         private CameraController m_CameraController;
         private MovementController m_MovementController;
+
         #endregion
 
         #region UnityEvents

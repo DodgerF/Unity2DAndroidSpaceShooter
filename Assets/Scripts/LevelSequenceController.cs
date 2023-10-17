@@ -40,6 +40,14 @@ namespace SpaceShooter
             CalculateLevelStatistic();
 
             ResultPanelController.Instance.ShowResults(LevelStatistics, success);
+
+            GameStatistics.Instance.AddKills(LevelStatistics.NumKills);
+            GameStatistics.Instance.AddScore(LevelStatistics.Score);
+            GameStatistics.Instance.AddTime(LevelStatistics.Time);
+            if(AstronautsCounter.Instance != null)
+            {
+                GameStatistics.Instance.AddAstronauts(AstronautsCounter.Instance.Saved);
+            }
         }
 
         public void AdvanceLevel()

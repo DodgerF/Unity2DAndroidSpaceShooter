@@ -4,9 +4,9 @@ namespace SpaceShooter
 {
     public class AIPath : MonoBehaviour
     {
-        [SerializeField] private AIZonePatrol[] m_Points;
+        [SerializeField] private Area[] m_Points;
         public int Lenght => m_Points.Length;
-        public AIZonePatrol this[int i] => m_Points[i];
+        public Area this[int i] => m_Points[i];
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()

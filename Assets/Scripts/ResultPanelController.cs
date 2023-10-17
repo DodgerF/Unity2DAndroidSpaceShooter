@@ -7,12 +7,12 @@ namespace SpaceShooter
     public class ResultPanelController : SingletonBase<ResultPanelController>
     {
         #region Properties
-        [SerializeField] private TextMeshProUGUI m_ResultText;
+        [SerializeField] protected TextMeshProUGUI m_ResultText;
 
 
-        [SerializeField] private TextMeshProUGUI m_NumKillsText;
-        [SerializeField] private TextMeshProUGUI m_ScoreText;
-        [SerializeField] private TextMeshProUGUI m_TimeText;
+        [SerializeField] protected TextMeshProUGUI m_NumKillsText;
+        [SerializeField] protected TextMeshProUGUI m_ScoreText;
+        [SerializeField] protected TextMeshProUGUI m_TimeText;
 
         [SerializeField] private TextMeshProUGUI m_ButtonText;
 

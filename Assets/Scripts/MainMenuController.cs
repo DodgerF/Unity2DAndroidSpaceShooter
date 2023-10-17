@@ -8,6 +8,8 @@ namespace SpaceShooter
 
         [SerializeField] private SpaceShip m_DefaultSpaceShip;
         [SerializeField] private GameObject m_ShipSelection;
+        [SerializeField] private GameObject m_ResultSelection;
+
 
         protected override void Awake()
         {
@@ -34,6 +36,18 @@ namespace SpaceShooter
         {
             m_ShipSelection.SetActive(true);
             gameObject.SetActive(false);
+        }
+
+        public void OnSelectResult()
+        {
+            if (m_ResultSelection.activeSelf) 
+            { 
+                m_ResultSelection.SetActive(false);
+            }
+            else
+            {
+                m_ResultSelection.SetActive(true);
+            }
         }
 
         public void OnButtonEnd()

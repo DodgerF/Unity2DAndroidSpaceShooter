@@ -11,8 +11,10 @@ namespace SpaceShooter
         private GameObject m_EmptyTarget;
         private Transform m_Target;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             m_EmptyTarget = new GameObject("EmptyTarget");
             m_EmptyTarget.transform.position = m_Parent.transform.position + m_Parent.transform.up * m_DistanceToEmptyTarget;
 
@@ -80,23 +82,17 @@ namespace SpaceShooter
                 if (hit.collider.transform.TryGetComponent<Destructible>(out Destructible destructible) && destructible != m_Parent)
                 {
                     destructible.ApplyDamage(m_Damage);
+
+                    UpdateScore(destructible);
                 }
                 OnProjectileLifeEnd();
             }
-        }
-        protected override void CheckTimer()
-        {
-            base.CheckTimer();
         }
 
         protected override void OnProjectileLifeEnd()
         {
             Destroy(m_EmptyTarget);
             base.OnProjectileLifeEnd();
-        }
-        public override void SetParentShooter(Destructible parent)
-        {
-            base.SetParentShooter(parent);
         }
     }
 }

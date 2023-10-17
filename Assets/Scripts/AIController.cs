@@ -14,7 +14,7 @@ namespace SpaceShooter
 
         [SerializeField] public AIBehaviour m_AIBehaviour;
 
-        [SerializeField] private AIZonePatrol m_PatolZone;
+        [SerializeField] private Area m_PatolZone;
         [SerializeField] private AIPath m_PatrolPath;
         private int m_CurrentPointPatrol;
 
@@ -163,7 +163,7 @@ namespace SpaceShooter
                     }
                     if (m_PatrolPath != null)
                     {
-                        AIZonePatrol point = m_PatrolPath[m_CurrentPointPatrol];
+                        Area point = m_PatrolPath[m_CurrentPointPatrol];
 
                         bool isInsidePoint = (point.transform.position - transform.position).sqrMagnitude < point.Radius * point.Radius;
 
@@ -219,7 +219,7 @@ namespace SpaceShooter
             return -angle;
         }
 
-        public void SerPatrolBehaviour(AIZonePatrol pointPatrol)
+        public void SerPatrolBehaviour(Area pointPatrol)
         {
             m_AIBehaviour = AIBehaviour.Patrol;
             m_PatolZone = pointPatrol;

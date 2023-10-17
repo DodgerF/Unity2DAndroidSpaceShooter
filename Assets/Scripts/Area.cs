@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceShooter
 {
-    public class AIZonePatrol : MonoBehaviour
+    public class Area : MonoBehaviour
     {
         [SerializeField] private float m_Radius;
         public float Radius => m_Radius;

@@ -9,7 +9,7 @@ namespace SpaceShooter
         [SerializeField] private LevelConditionAstronuats m_Astronauts;
         private TextMeshProUGUI m_LevelProgress;
 
-        private void Awake()
+        private void Start()
         {
             m_LevelProgress = GetComponent<TextMeshProUGUI>();
             RefreshText();
