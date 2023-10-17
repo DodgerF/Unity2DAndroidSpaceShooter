@@ -11,6 +11,14 @@ namespace SpaceShooter
         [SerializeField] private float m_ScaleDivider;
         [SerializeField] private float m_ScatteringRadiusOfRemains;
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.transform.root.TryGetComponent<GravityWell>(out GravityWell gravityWell))
+            {
+                OnDeath();
+            }           
+        }
+
         protected override void OnDeath()
         {
             if (transform.localScale == Vector3.one)

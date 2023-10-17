@@ -1,23 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace SpaceShooter
 {
     public class Astronaut : PickingUp
-    {
-
+    {  
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.transform.root.TryGetComponent<GravityWell>(out GravityWell spaceWell))
+            if (collision.transform.root.TryGetComponent<SpaceShip>(out SpaceShip col))
             {
-                GlobalEventManager.Instance.AstonautOnDeath?.Invoke();
-                Destroy(gameObject);
+                return;
             }
+            AstronautsCounter.Instance.ReduceAmount(1);
+
+            Destroy(gameObject);
         }
 
         protected override void OnPickedUp(SpaceShip ship)
         {
-            GlobalEventManager.Instance.AstonautOnPicked?.Invoke();
+            AstronautsCounter.Instance.InreaseSaved(1);
         }
     }
 }
